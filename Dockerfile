@@ -3,7 +3,11 @@
 # ==================================================
 
 # Build stage
+<<<<<<< HEAD
 FROM python:3.12-slim AS builder
+=======
+FROM python:3.13-slim AS builder
+>>>>>>> dc25b53 (Add CI pipeline with GitHub Actions)
 
 WORKDIR /app
 
@@ -23,11 +27,19 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 
 # Production stage
+<<<<<<< HEAD
 FROM python:3.12-slim AS production
 
 WORKDIR /app
 
 # Install git (required by RAGAS/datasets library)
+=======
+FROM python:3.13-slim AS production
+
+WORKDIR /app
+
+# # Install git (required by RAGAS/datasets library)
+>>>>>>> dc25b53 (Add CI pipeline with GitHub Actions)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && rm -rf /var/lib/apt/lists/*
@@ -61,4 +73,8 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD python -c "import httpx; httpx.get('http://localhost:8000/health')" || exit 1
 
 # Run application
+<<<<<<< HEAD
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+=======
+CMD ["uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "8000"]
+>>>>>>> dc25b53 (Add CI pipeline with GitHub Actions)
